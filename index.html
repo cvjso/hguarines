@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=980">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SIG@ - UPE">
+  <meta name="theme-color" content="#002480">
+  <link rel="icon" type="image/png" href="Logo-upe-site.png">
+  <link rel="apple-touch-icon" href="Logo-upe-site.png">
+  <title>SIG@ - UPE</title>
+  <style>
+    /* ==========================================================================
+       FONTE OFICIAL DO SIG@ UPE (/upe/jsp/acesso/fonte/DroidSans.ttf)
+       ========================================================================== */
+    @font-face {
+      font-family: Droid;
+      src: url('DroidSans.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* ==========================================================================
+       RESET & GLOBAIS OFICIAIS (index.css + padrao.css + azul.css + siga.css + upe.css)
+       ========================================================================== */
+    * {
+      font-family: Droid, sans-serif;
+      font-size: 12px;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      background-color: #fff;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      color: #333;
+    }
+
+    fieldset, a, img {
+      border: 0;
+    }
+
+    a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    ol, ul {
+      list-style: none;
+    }
+
+    div {
+      overflow: visible;
+    }
+
+    .cor {
+      color: #002480;
+    }
+
+    .cor label {
+      color: #333;
+    }
+
+    .fonteBranca {
+      color: #fff;
+      width: 22px;
+    }
+
+    .conteiner {
+      margin: 0 auto;
+      width: 1024px;
+    }
+
+    /* ==========================================================================
+       SPRITE OFICIAL (sprite_logado-azul.png)
+       ========================================================================== */
+    #barra_de_acessibilidade a,
+    #barra_de_acessibilidade li,
+    .busca-input,
+    .email, .senha, .sair, .logout, .ajuda-geral, .botaoHome,
+    #mozilla, #ie, #chrome {
+      background-image: url('sprite_logado-azul.png');
+    }
+
+    /* ==========================================================================
+       1. TOPO E BARRA AZUL DE NAVEGAÇÃO (#AreaTopo + .topo + #run)
+       ========================================================================== */
+    #AreaTopo {
+      height: 112px;
+      width: 100%;
+      min-width: 1024px;
+      background: url('fundoGeral.png') repeat-x scroll center top #fff;
+      flex-shrink: 0;
+    }
+
+    .topo-wrapper {
+      width: 1024px;
+      margin: 0 auto;
+      height: 75px;
+      overflow: hidden;
+    }
+
+    .topo {
+      height: 75px;
+      margin: 0 50px 0 12px;
+      width: auto;
+    }
+
+    .logo {
+      border: none;
+      cursor: pointer;
+      float: left;
+      height: 60px;
+      margin-top: 8px;
+      overflow: hidden;
+      width: 135px;
+      display: block;
+    }
+
+    .logo img {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-ies {
+      float: left;
+      height: auto;
+      margin: 6px 0 0 24px;
+      width: auto;
+    }
+
+    .logo-ies img {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
+
+    /* Funções do Topo (Busca + Botões + Tempo Restante) */
+    .funcoes-topo {
+      display: block;
+      float: right;
+      height: 58px;
+      margin: 15px 0 0;
+      text-align: right;
+      width: 430px;
+    }
+
+    .busca {
+      float: left;
+    }
+
+    input[type='text'].busca-input {
+      background-position: -38px -369px;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+      color: #555;
+      font-family: Droid, sans-serif;
+      font-size: 12px;
+      height: 17px;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 1px 1px 1px 25px;
+      width: 192px;
+      outline: none;
+      box-sizing: content-box;
+    }
+
+    .busca-input.default-value {
+      color: #555;
+      font-style: italic;
+    }
+
+    .busca-input:focus {
+      border-color: #002A80;
+      font-style: normal;
+    }
+
+    /* Botões Superiores Direitos (? / Chave / Logout) */
+    .botoes {
+      cursor: default;
+      display: block;
+      float: right;
+      margin: -3px 0 0 5px;
+      overflow: hidden;
+    }
+
+    .botoes-li {
+      display: inline-block;
+      height: 22px;
+      margin-right: 4px;
+      overflow: hidden;
+    }
+
+    .botoes-li:last-child {
+      margin-right: 0;
+    }
+
+    .botoes-li-a {
+      border: none;
+      cursor: pointer;
+      display: block;
+      height: 22px;
+      overflow: hidden;
+      text-indent: 9999px;
+      width: 22px;
+    }
+
+    .ajuda-geral       { background-position: 0  -46px; width: 22px; height: 22px; }
+    .ajuda-geral:hover { background-position: 0  -69px; width: 22px; height: 22px; }
+    .senha             { background-position: 0 -586px; width: 22px; height: 22px; }
+    .senha:hover       { background-position: 0 -609px; width: 22px; height: 22px; }
+    .logout            { background-position: 0 -367px; width: 22px; height: 22px; }
+    .logout:hover      { background-position: 0 -344px; width: 22px; height: 22px; }
+
+    .tempoRestante {
+      clear: both;
+      float: right;
+      font-weight: normal;
+      height: 20px;
+      margin-top: 2px;
+      padding-right: 2px;
+      text-align: right;
+      width: 155px;
+    }
+
+    .textTempoRestante {
+      padding-right: 8px;
+      font-size: 12px;
+    }
+
+    .contagemRelogio {
+      color: #555;
+      display: block;
+      float: right;
+      width: 32px;
+      font-size: 12px;
+    }
+
+    /* Barra de Acessibilidade */
+    #barra_de_acessibilidade * {
+      font: 13px Droid, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #barra_de_acessibilidade {
+      border-right: 1px solid #ccc;
+      float: right;
+      margin: 15px 0 0 0;
+      padding-right: 5px;
+      width: 155px;
+    }
+
+    #barra_de_acessibilidade ul {
+      float: right;
+    }
+
+    #barra_de_acessibilidade li {
+      color: #555;
+      float: left;
+      line-height: 22px;
+      list-style: none;
+      margin-right: 6px;
+      overflow: hidden;
+    }
+
+    #barra_de_acessibilidade a {
+      background-repeat: no-repeat;
+      display: block;
+      height: 22px;
+      text-decoration: none;
+      text-indent: -999px;
+      width: 22px;
+    }
+
+    #barra_de_acessibilidade .text-bar,
+    #barra_de_acessibilidade .text-bar a {
+      background: none;
+      border: 0;
+      text-indent: 0;
+      width: auto;
+    }
+
+    #barra_de_acessibilidade .acessibilidade       { background-position: 0      0; width: 22px; height: 22px; margin-right: 2px; }
+    #barra_de_acessibilidade .acessibilidade:hover { background-position: 0  -23px; width: 22px; height: 22px; }
+    #barra_de_acessibilidade .contraste            { background-position: 0  -92px; width: 22px; height: 22px; }
+    #barra_de_acessibilidade .contraste:hover      { background-position: 0 -115px; width: 22px; height: 22px; }
+
+    /* Menu Principal Azul (#run + #menuTopo + ul#menu) */
+    #run {
+      clear: both;
+      height: 37px;
+      overflow: hidden;
+      width: 100%;
+      z-index: 87;
+    }
+
+    #menuTopo {
+      margin: 0 auto;
+      height: 36px;
+      overflow: hidden;
+      width: 1024px;
+    }
+
+    ul#menu {
+      display: block;
+      font-size: 13.5px;
+      height: 36px;
+      line-height: 37px;
+      list-style: none;
+      margin-top: 1px;
+      margin-left: 2px;
+      width: 1024px;
+    }
+
+    ul#menu > li {
+      float: left;
+    }
+
+    ul#menu > li > a {
+      color: #fff;
+      display: block;
+      font-size: 13.5px;
+      font-weight: normal;
+      height: 35px;
+      padding: 0 15px;
+      text-decoration: none;
+    }
+
+    ul#menu > li > a.home-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-left: 16px;
+    }
+
+    .icon-home-img {
+      width: 17px;
+      height: 13px;
+      display: inline-block;
+      background: url('home.png') no-repeat center center;
+      margin-top: -1px;
+    }
+
+    html body #menuTopo #menu .menu-link a:hover,
+    html body #menuTopo #menu .menu-link:hover,
+    html body #menuTopo #menu li:hover {
+      background: #002066 !important;
+    }
+
+    /* ==========================================================================
+       2. BARRA DE INFORMAÇÕES DO USUÁRIO (#box-informacoes + #Informacoes + #efeito)
+       ========================================================================== */
+    #box-informacoes {
+      background: #f2f2f2;
+      border-bottom: 1px solid #ccc;
+      height: 30px;
+      width: 100%;
+      min-width: 1024px;
+      box-shadow: 0 1px 5px rgba(50, 50, 50, .14);
+      -moz-box-shadow: 0 1px 5px rgba(50, 50, 50, .14);
+      -webkit-box-shadow: 0 1px 5px rgba(50, 50, 50, .14);
+      clear: both;
+      flex-shrink: 0;
+    }
+
+    #Informacoes {
+      display: block;
+      height: 20px;
+      line-height: 30px;
+      margin: 0 auto;
+      padding-left: 16px;
+      width: 1024px;
+      box-sizing: border-box;
+    }
+
+    #Informacoes > li {
+      display: block;
+      float: left;
+      height: 30px;
+      margin-right: 14px;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    #Informacoes > li span.cor {
+      color: #002480;
+      font-weight: normal;
+    }
+
+    #Informacoes > li label {
+      color: #333;
+      font-weight: normal;
+    }
+
+    #efeito {
+      background: url('efeito.png') center top no-repeat;
+      height: 17px;
+      width: 100%;
+      min-width: 1024px;
+      z-index: 99;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       3. ÁREA DE CONTEÚDO PRINCIPAL (#BaseConteudo + #AreaDeConteudo)
+       ========================================================================== */
+    #BaseConteudo {
+      background-color: #fff;
+      flex: 1;
+      padding-bottom: 120px;
+      width: 100%;
+      min-width: 1024px;
+    }
+
+    #AreaDeConteudo {
+      margin: 0 auto;
+      width: 1024px;
+      padding-left: 16px;
+      box-sizing: border-box;
+    }
+
+    /* ==========================================================================
+       4. MENU LATERAL ESQUERDO (#menuLateral + #baseMenu)
+       ========================================================================== */
+    #menuLateral {
+      float: left;
+      width: 150px;
+      margin-top: 0px;
+    }
+
+    #menuLateral .titulo-modulo {
+      font-family: Droid, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      color: #000;
+      line-height: 16px;
+    }
+
+    #menuLateral .subtitulo-modulo {
+      font-family: Droid, sans-serif;
+      font-size: 12px;
+      font-weight: normal;
+      color: #333;
+      line-height: 18px;
+    }
+
+    #menuLateral hr.hr-topo-menu {
+      border: 0;
+      border-top: 1px solid #b1b1b1;
+      margin: 6px 0 15px 0;
+    }
+
+    #menuLateral hr.hr-base-menu {
+      border: 0;
+      border-top: 1px solid #d7d7d7;
+      margin: 15px 0 0 0;
+    }
+
+    #baseMenu, #baseMenu * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #baseMenu {
+      width: 140px;
+      font-size: 13px;
+      padding: 5px;
+      list-style: none;
+    }
+
+    #baseMenu li {
+      background: #f2f2f2;
+      margin-bottom: 1px;
+    }
+
+    #baseMenu a {
+      text-decoration: none;
+      color: #333;
+      padding: 7px 10px;
+      display: block;
+      text-align: left;
+      border-left: 3px solid transparent;
+      font-size: 13px;
+      font-weight: normal;
+      line-height: 16px;
+      cursor: pointer;
+    }
+
+    #baseMenu a:hover {
+      background: #E9E8E5;
+      border-left: 3px solid #002480;
+    }
+
+    /* ==========================================================================
+       5. COLUNA DIREITA (#Frame + #barra_navegacao + .box-botoes + .form-corpo)
+       ========================================================================== */
+    #Frame {
+      float: left;
+      height: auto;
+      margin: -3px 0 0 16px;
+      width: 783px;
+    }
+
+    /* Barra de Navegação (Breadcrumb) */
+    .container_barra_navegacao {
+      clear: both;
+      display: table;
+    }
+
+    #barra_navegacao {
+      border-radius: 3px;
+      float: left;
+      margin: 4px 0 6px 0;
+      width: auto;
+    }
+
+    #barra_navegacao * {
+      color: #777;
+      display: inline-block;
+      font: 11px Droid, sans-serif;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    #barra_navegacao ul {
+      display: inline-block;
+    }
+
+    #barra_navegacao li {
+      float: left;
+      margin-right: 0;
+    }
+
+    #barra_navegacao a {
+      background-image: url('seta_barra_navegacional.png');
+      background-position: right 3px;
+      background-repeat: no-repeat;
+      height: 20px;
+      line-height: 20px;
+      padding: 0 20px 0 10px;
+    }
+
+    #barra_navegacao li:first-child a {
+      padding-left: 5px;
+    }
+
+    #barra_navegacao li:last-child a {
+      background-image: none;
+    }
+
+    #barra_navegacao .link_barra_navegacao {
+      color: #002480;
+      text-decoration: underline;
+    }
+
+    /* Botões Atalho e Ajuda (.box-botoes) */
+    .box-botoes {
+      margin-right: 10px;
+      position: relative;
+      top: 31px;
+      width: 97.5%;
+      z-index: 50;
+      float: left;
+    }
+
+    a.form-ajuda {
+      background: url('inter.png') no-repeat left center;
+      border-radius: 10px;
+      color: #888;
+      display: block;
+      float: right;
+      height: 15px;
+      margin-right: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    a.form-ajuda div {
+      float: left;
+      margin-left: 20px;
+      overflow: hidden;
+      width: 35px;
+    }
+
+    a.form-ajuda span {
+      color: #333;
+      display: block;
+      float: right;
+      font-family: Droid, sans-serif;
+      font-size: 11px;
+      height: 15px;
+      line-height: 15px;
+      width: 35px;
+    }
+
+    a.form-ajuda:hover {
+      background-image: url('inter2.png');
+      color: #900;
+    }
+
+    .form-add-atalho {
+      background: url('estado1.png') no-repeat left center;
+      border-radius: 10px;
+      cursor: pointer;
+      float: right;
+      height: 15px;
+      margin-right: 8px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .box-botoes .form-add-atalho div {
+      float: left;
+      margin-left: 20px;
+      overflow: hidden;
+      width: 40px;
+    }
+
+    .box-botoes a.form-add-atalho div span {
+      color: #333;
+      display: block;
+      float: right;
+      font-family: Droid, sans-serif;
+      font-size: 11px;
+      height: 15px;
+      line-height: 15px;
+      width: 40px;
+    }
+
+    .form-add-atalho:hover {
+      background: url('estado2.png') no-repeat left center;
+      color: #333;
+      text-decoration: none;
+    }
+
+    /* Quadro Principal (.form-corpo + .form-titulo) */
+    .form-corpo {
+      border-radius: 8px;
+      border: 1px solid #cdcdcd;
+      float: left;
+      font-size: 12px;
+      line-height: 20px;
+      margin-bottom: 50px;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-top: 6px;
+      width: 728px;
+      padding: 45px 20px 25px 20px;
+      position: relative;
+      box-sizing: content-box;
+      background: #fff;
+    }
+
+    .form-corpo .form-titulo {
+      background: #fff;
+      display: block;
+      font-family: Droid, sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      color: #002480;
+      margin: 0;
+      padding: 0 5px;
+      position: absolute;
+      top: -10px;
+      left: 20px;
+    }
+
+    /* Tabela de Dados do Discente (.edit + .editPesquisa em upe.css) */
+    .tabela-dados-discente {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .tabela-dados-discente tr {
+      height: 13.5px;
+    }
+
+    .tabela-dados-discente td {
+      padding: 0;
+      line-height: 13.5px;
+      vertical-align: baseline;
+    }
+
+    .tabela-dados-discente td.col-rotulo {
+      width: 168px;
+    }
+
+    .edit {
+      font-family: Droid, sans-serif;
+      font-size: 8pt;
+      color: #000000;
+      font-weight: normal;
+    }
+
+    .editPesquisa {
+      font-family: Droid, sans-serif;
+      font-size: 7pt;
+      color: #000099;
+      font-weight: normal;
+    }
+
+    /* Linha divisória suave abaixo de Período Letivo Corrente */
+    hr.linha-divisoria-discente {
+      border: 0;
+      border-top: 1px solid #fff5f5;
+      margin: 12px 0 12px 0;
+    }
+
+    /* ==========================================================================
+       6. SANFONAS / ACORDEÕES (.sanfona + .li-sanfona em siga.css)
+       ========================================================================== */
+    .grupo-sanfona-titulo {
+      font-family: Droid, sans-serif;
+      font-size: 12px;
+      color: #000;
+      line-height: 20px;
+      margin-top: 4px;
+      margin-bottom: 1px;
+    }
+
+    .grupo-sanfona-titulo b {
+      font-weight: bold;
+    }
+
+    .sanfona {
+      width: 728px;
+      padding: 0;
+      margin-left: 0;
+      margin-bottom: 6px;
+      list-style: none;
+    }
+
+    .sanfona .li-sanfona {
+      border: 1px solid #ccc;
+      margin-bottom: 5px;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      position: relative;
+      text-decoration: none;
+      color: #333;
+      display: block;
+      background: #f9f9f9;
+      padding: 5px 20px;
+      font-size: 12px;
+      line-height: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sanfona .li-sanfona:hover {
+      background: #fff;
+    }
+
+    .sanfona .li-sanfona.ativo {
+      background: #fff;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .sanfona .li-sanfona .before {
+      margin-top: 6px;
+      margin-left: -10px;
+      width: 0px;
+      height: 0px;
+      line-height: 0;
+      font-size: 0;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 5px solid #888;
+      float: left;
+      position: relative;
+    }
+
+    .sanfona .li-sanfona.ativo .before {
+      margin-top: 7px;
+      margin-left: -11px;
+      border-top: 5px solid #222;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-bottom: 0;
+    }
+
+    .sanfona .content {
+      display: none;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-top: 0;
+      margin-top: -5px;
+      margin-bottom: 5px;
+      padding: 10px 20px 12px 20px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    .sanfona .content.aberto {
+      display: block;
+    }
+
+    /* Tabelas internas das sanfonas (.tabelaPadrao) */
+    table.tabelaPadrao {
+      width: 100%;
+      border-bottom: 1px solid #ddd;
+      border-collapse: collapse !important;
+      margin-top: 4px;
+    }
+
+    .tabelaPadrao tr.linhaTituloTabela th {
+      font-family: Droid, sans-serif;
+      font-size: 9pt;
+      color: #FFFFFF;
+      background-color: #002480;
+      padding: 3px 6px;
+      border-right: 1px solid white;
+      text-align: left;
+    }
+
+    .tabelaPadrao tr.linhaTituloTabela th:first-child {
+      border-radius: 6px 0 0 0;
+    }
+
+    .tabelaPadrao tr.linhaTituloTabela th:last-child {
+      border-radius: 0 6px 0 0;
+      border-right: 0;
+    }
+
+    .tabelaPadrao tr.linhaDataTableTipo1 td {
+      background-color: #f4f4f4;
+      color: #333;
+      font-family: Droid, sans-serif;
+      font-size: 9pt;
+      padding: 3px 6px;
+    }
+
+    .tabelaPadrao tr.linhaDataTableTipo2 td {
+      background-color: #fff;
+      color: #333;
+      font-family: Droid, sans-serif;
+      font-size: 9pt;
+      padding: 3px 6px;
+    }
+
+    /* ==========================================================================
+       7. RODAPÉ OFICIAL (#Rodape.principal em index.css + azul.css)
+       ========================================================================== */
+    #Rodape.principal {
+      background: #eee;
+      border-top: 1px solid #ccc;
+      box-shadow: 0 -3px 1px rgba(50, 50, 50, .05);
+      -moz-box-shadow: 0 -3px 1px rgba(50, 50, 50, .05);
+      -webkit-box-shadow: 0 -3px 1px rgba(50, 50, 50, .05);
+      clear: both;
+      height: 30px;
+      width: 100%;
+      min-width: 1024px;
+      margin-top: auto;
+      flex-shrink: 0;
+    }
+
+    #Rodape .conteiner {
+      width: 1024px;
+      margin: 0 auto;
+      padding: 0 50px 0 16px;
+      box-sizing: border-box;
+    }
+
+    #Rodape .titulo {
+      color: #999;
+      float: left;
+      font-size: 10px;
+      margin: 5px 5px 0 0;
+    }
+
+    #Rodape ul {
+      float: left;
+      margin-top: 2px;
+    }
+
+    #Rodape ul li {
+      display: inline-block;
+    }
+
+    #Rodape ul li a {
+      display: block;
+      height: 23px;
+      overflow: hidden;
+      text-indent: -9999px;
+      width: 23px;
+    }
+
+    /* Ícones dos navegadores em escala de cinza (coloridos no hover) */
+    #mozilla       { background-position:  0px -800px; }
+    #mozilla:hover { background-position: -1px -824px; }
+    #chrome        { background-position: -1px -755px; }
+    #chrome:hover  { background-position: -1px -778px; }
+    #ie            { background-position: -1px -848px; }
+    #ie:hover      { background-position: -1px -873px; }
+
+    #Rodape .icones {
+      border-left: 1px solid #999;
+      color: #999;
+      float: left;
+      font-size: 10px;
+      height: 18px;
+      line-height: 15px;
+      margin-left: 10px;
+      margin-top: 4px;
+      padding-left: 10px;
+    }
+
+    #Rodape .icones a {
+      color: #666;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    .maquina {
+      background: url('sprite_logado-azul.png') no-repeat 0 -403px;
+      cursor: default;
+      float: right;
+      height: 18px;
+      padding: 4px 3px 5px 8px;
+      width: 22px;
+      box-sizing: content-box;
+    }
+
+    #Rodape .maquina span {
+      font-size: 8px;
+      margin: .5px 0 0 1px;
+      display: block;
+      line-height: 11px;
+    }
+
+    .maquina strong {
+      font-weight: normal;
+      font-size: 8px;
+    }
+
+    #Rodape .info {
+      color: #999;
+      float: right;
+      font-size: 10px;
+      line-height: 14px;
+      margin: 1px 10px 0 0;
+      text-align: right;
+      width: 400px;
+    }
+
+    #Rodape .info p {
+      color: #999;
+      font-size: 10px;
+    }
+
+    #Rodape .info strong,
+    #Rodape .info strong a {
+      color: #666;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    /* ==========================================================================
+       8. FIDELIDADE 1:1 NO IPHONE (Safari & Visualizador do WhatsApp)
+       Reproduz exatamente o comportamento do siga.upe.br no iOS (viewport 980px +
+       proporções exatas de texto do WebKit iOS dentro do .form-corpo)
+       ========================================================================== */
+    @media only screen and (hover: none) and (pointer: coarse) {
+      html, body {
+        overflow-x: hidden;
+      }
+
+      body {
+        min-height: max(100vh, 1755px);
+      }
+
+      .topo {
+        margin: 0 18px 0 4px;
+      }
+
+      ul#menu > li > a.home-link {
+        padding-left: 6px;
+      }
+
+      #Informacoes {
+        padding-left: 5px;
+      }
+
+      #AreaDeConteudo {
+        padding-left: 5px;
+      }
+
+      #Frame {
+        margin: -3px 0 0 18px;
+      }
+
+      .form-corpo {
+        width: 733px;
+        padding: 45px 20px 25px 20px;
+      }
+
+      .tabela-dados-discente {
+        width: 580px;
+        table-layout: fixed;
+        margin-bottom: 12px;
+      }
+
+      .tabela-dados-discente tr {
+        height: auto;
+      }
+
+      .tabela-dados-discente td {
+        padding: 1px 0;
+        vertical-align: middle;
+      }
+
+      .tabela-dados-discente td.col-rotulo {
+        width: 115px;
+        padding-right: 6px;
+      }
+
+      .tabela-dados-discente td.col-rotulo .edit {
+        font-size: 8pt;
+        line-height: 12px;
+        display: inline-block;
+        max-width: 92px;
+      }
+
+      .tabela-dados-discente .editPesquisa {
+        font-size: 14.5px;
+        line-height: 19px;
+        display: inline-block;
+        max-width: 440px;
+      }
+
+      hr.linha-divisoria-discente {
+        width: 605px;
+        margin: 12px 0 14px 0;
+      }
+
+      .grupo-sanfona-titulo,
+      .grupo-sanfona-titulo b {
+        font-size: 16.5px;
+        line-height: 26px;
+      }
+
+      .grupo-sanfona-titulo {
+        margin-top: 10px;
+        margin-bottom: 4px;
+      }
+
+      .sanfona {
+        width: 733px;
+        margin-bottom: 8px;
+      }
+
+      .sanfona .li-sanfona {
+        font-size: 16.5px;
+        line-height: 25px;
+        padding: 7px 20px;
+        margin-bottom: 7px;
+      }
+
+      .sanfona .li-sanfona .before {
+        margin-top: 5px;
+        margin-left: -10px;
+      }
+
+      #Rodape .conteiner {
+        padding: 0 0 0 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. TOPO + MENU PRINCIPAL AZUL (#AreaTopo)
+       ======================================================================== -->
+  <div id="AreaTopo" class="background-area-topo">
+    <div class="topo-wrapper">
+      <div class="topo">
+        <!-- Logo SIG@ (da pasta) -->
+        <a href="#inicio" class="logo" title="SIG@ - Sistema de Informações e Gestão Acadêmica">
+          <img src="logo-siga-transparent.png" alt="SIG@">
+        </a>
+
+        <!-- Logo UPE (da pasta) -->
+        <div class="logo-ies">
+          <a href="http://www.upe.br/" target="_blank" class="link-ies" title="Site da Instituição">
+            <img src="Logo-upe-site.png" alt="UPE">
+          </a>
+        </div>
+
+        <!-- Funções do Topo (Busca + Botões + Tempo Restante) -->
+        <div class="funcoes-topo">
+          <div class="busca">
+            <input type="text" class="busca-input default-value" value="Pesquisar funcionalidade"
+                   onfocus="if(this.value==='Pesquisar funcionalidade'){this.value='';this.classList.remove('default-value');}"
+                   onblur="if(this.value===''){this.value='Pesquisar funcionalidade';this.classList.add('default-value');}">
+          </div>
+
+          <ul class="botoes">
+            <li class="botoes-li">
+              <a href="javascript:void(0);" class="botoes-li-a ajuda-geral" title="Ajuda">Ajuda</a>
+            </li>
+            <li class="botoes-li">
+              <a href="javascript:void(0);" class="botoes-li-a senha" title="Alterar Senha">Senha</a>
+            </li>
+            <li class="botoes-li">
+              <a href="javascript:alert('Sessão encerrada.');" class="botoes-li-a logout" title="Sair do Sistema">Sair</a>
+            </li>
+          </ul>
+
+          <div class="tempoRestante">
+            <span class="textTempoRestante cor">Tempo restante:</span>
+            <span class="contagemRelogio" id="sessionTimer">19:55</span>
+          </div>
+        </div>
+
+        <!-- Barra de Acessibilidade (à esquerda da busca, com borda divisória direita) -->
+        <div id="barra_de_acessibilidade">
+          <ul>
+            <li class="text-bar">Acessibilidade</li>
+            <li>
+              <a href="javascript:void(0);" class="acessibilidade" title="Acessibilidade">Acessibilidade</a>
+            </li>
+            <li>
+              <a href="javascript:toggleContrast();" class="contraste" title="Habilitar Contraste">Contraste</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de Menu Azul (#run + #menuTopo + ul#menu) -->
+    <div id="run">
+      <div id="menuTopo">
+        <ul id="menu">
+          <li class="menu-link">
+            <a href="#inicio" class="home-link"><span class="icon-home-img"></span>Início</a>
+          </li>
+          <li class="menu-link">
+            <a href="#conclusao">Conclusão</a>
+          </li>
+          <li class="menu-link">
+            <a href="#consultas">Consultas</a>
+          </li>
+          <li class="menu-link">
+            <a href="#servicos">Serviços</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. BARRA DE INFORMAÇÕES DO USUÁRIO (#box-informacoes + #efeito)
+       ======================================================================== -->
+  <div id="box-informacoes">
+    <ul id="Informacoes">
+      <li>
+        <span class="cor">Nome: </span>
+        <label>MARIA ESTHER PEREIRA DIAS</label>
+      </li>
+      <li>
+        <span class="cor">Órgão: </span>
+        <label title="COORDENAÇÃO DO BACHARELADO EM ENGENHARIA ELÉTRICA ELETROTÉCNICA">COORD. BEL. ENG....</label>
+      </li>
+      <li>
+        <span class="cor">Módulo: </span>
+        <label>ENSINO - GRADUAÇÃO</label>
+      </li>
+      <li>
+        <span class="cor">Perfil: </span>
+        <label>DISCENTE</label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Sombra radial oficial abaixo da barra de informações -->
+  <div id="efeito"></div>
+
+  <!-- ========================================================================
+       3. CONTEÚDO PRINCIPAL (#BaseConteudo + #AreaDeConteudo)
+       ======================================================================== -->
+  <div id="BaseConteudo">
+    <div id="AreaDeConteudo">
+
+      <!-- Coluna Lateral Esquerda (#menuLateral + #baseMenu) -->
+      <div id="menuLateral">
+        <div class="titulo-modulo">Consultas</div>
+        <div class="subtitulo-modulo">Detalhamento de Discente</div>
+        <hr class="hr-topo-menu">
+
+        <ul id="baseMenu">
+          <li><a href="javascript:abrirSanfona('sanfona-grade');">Grade de Horário</a></li>
+          <li><a href="javascript:abrirSanfona('sanfona-historico');">Histórico Escolar</a></li>
+          <li><a href="javascript:abrirSanfona('sanfona-pessoais');">Informações do Discente</a></li>
+          <li><a href="javascript:abrirSanfona('sanfona-notas');">Notas</a></li>
+        </ul>
+
+        <hr class="hr-base-menu">
+      </div>
+
+      <!-- Coluna Principal Direita (#Frame) -->
+      <div id="Frame">
+
+        <!-- Barra Navegacional (Breadcrumb) -->
+        <div class="container_barra_navegacao">
+          <div id="barra_navegacao">
+            <ul>
+              <li><a href="javascript:void(0);" class="no-link">Consultas</a></li>
+              <li><a href="javascript:void(0);" class="link_barra_navegacao">Detalhamento de Discente</a></li>
+              <li><a href="javascript:void(0);" class="no-link">Informações do Discente</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Botões Superiores do Formulário (Atalho / Ajuda) -->
+        <div class="box-botoes">
+          <a href="javascript:void(0);" class="form-ajuda" title="Ajuda sobre esta funcionalidade">
+            <div><span>Ajuda</span></div>
+          </a>
+          <a href="javascript:void(0);" class="form-add-atalho" title="Adicionar aos Meus Atalhos">
+            <div><span>Atalho</span></div>
+          </a>
+        </div>
+
+        <!-- Quadro Principal (.form-corpo) -->
+        <div class="form-corpo">
+          <span class="form-titulo">Detalhamento de Discente</span>
+
+          <!-- Tabela de Identificação do Discente -->
+          <table class="tabela-dados-discente">
+            <tbody>
+              <tr>
+                <td class="col-rotulo"><span class="edit">CPF:</span></td>
+                <td><span class="editPesquisa">119.180.494-16</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Matrícula:</span></td>
+                <td><span class="editPesquisa">300584129</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Nome:</span></td>
+                <td><span class="editPesquisa">MARIA ESTHER PEREIRA DIAS</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Curso:</span></td>
+                <td><span class="editPesquisa">ENGENHARIA ELÉTRICA ELETROTÉCNICA - CAMPUS BENFICA - POLI</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Período de Ingresso:</span></td>
+                <td><span class="editPesquisa">2019.1</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Tipo do Ingresso:</span></td>
+                <td><span class="editPesquisa">VESTIBULAR</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Perfil:</span></td>
+                <td><span class="editPesquisa">ETT012-1</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Turno:</span></td>
+                <td><span class="editPesquisa">MANHA</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Situação:</span></td>
+                <td><span class="editPesquisa">ATIVO</span></td>
+              </tr>
+              <tr>
+                <td class="col-rotulo"><span class="edit">Período Letivo Corrente:</span></td>
+                <td><span class="editPesquisa">2026.2</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <hr class="linha-divisoria-discente">
+
+          <!-- Grupo 1: Informações do Discente -->
+          <div class="grupo-sanfona-titulo"><b>Informações do Discente</b></div>
+          <ul class="sanfona">
+            <li class="li-sanfona" id="sanfona-pessoais" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Dados Pessoais
+            </li>
+            <div class="content">
+              <table class="tabelaPadrao">
+                <tbody>
+                  <tr class="linhaDataTableTipo1">
+                    <td><b>Data de Nascimento:</b> 14/08/2000</td>
+                    <td><b>Naturalidade:</b> Recife - PE</td>
+                    <td><b>Nacionalidade:</b> Brasileira</td>
+                  </tr>
+                  <tr class="linhaDataTableTipo2">
+                    <td><b>RG / Órgão Expedidor:</b> 8.452.190 SDS/PE</td>
+                    <td><b>E-mail:</b> mariaesther.dias@poli.br</td>
+                    <td><b> Estado Civil:</b> Solteira</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Situação Acadêmica
+            </li>
+            <div class="content">
+              <table class="tabelaPadrao">
+                <tbody>
+                  <tr class="linhaDataTableTipo1">
+                    <td><b>Coeficiente de Rendimento Geral:</b> 8.35</td>
+                    <td><b>Carga Horária Cumprida:</b> 3.600h / 3.960h</td>
+                    <td><b>Situação no Período:</b> Matriculado</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Histórico do Vínculo
+            </li>
+            <div class="content">
+              <table class="tabelaPadrao">
+                <thead>
+                  <tr class="linhaTituloTabela">
+                    <th>Período</th>
+                    <th>Situação</th>
+                    <th>Observação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="linhaDataTableTipo1">
+                    <td>2019.1</td>
+                    <td>ATIVO</td>
+                    <td>Ingresso por Vestibular</td>
+                  </tr>
+                  <tr class="linhaDataTableTipo2">
+                    <td>2026.2</td>
+                    <td>ATIVO</td>
+                    <td>Matrícula Regular</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ul>
+
+          <!-- Grupo 2: Informações Acadêmicas -->
+          <div class="grupo-sanfona-titulo"><b>Informações Acadêmicas</b></div>
+          <ul class="sanfona">
+            <li class="li-sanfona" id="sanfona-notas" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Notas
+            </li>
+            <div class="content">
+              <table class="tabelaPadrao">
+                <thead>
+                  <tr class="linhaTituloTabela">
+                    <th>Código</th>
+                    <th>Componente Curricular</th>
+                    <th>1ª VA</th>
+                    <th>2ª VA</th>
+                    <th>Média</th>
+                    <th>Faltas</th>
+                    <th>Situação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="linhaDataTableTipo1">
+                    <td>ETT4102</td>
+                    <td>SISTEMAS ELÉTRICOS DE POTÊNCIA II</td>
+                    <td>8,50</td>
+                    <td>9,00</td>
+                    <td>8,75</td>
+                    <td>2</td>
+                    <td>Aprovado por Média</td>
+                  </tr>
+                  <tr class="linhaDataTableTipo2">
+                    <td>ETT4108</td>
+                    <td>SUBESTAÇÕES E EQUIPAMENTOS ELÉTRICOS</td>
+                    <td>9,00</td>
+                    <td>8,50</td>
+                    <td>8,75</td>
+                    <td>0</td>
+                    <td>Aprovado por Média</td>
+                  </tr>
+                  <tr class="linhaDataTableTipo1">
+                    <td>ETT4215</td>
+                    <td>PROTEÇÃO DE SISTEMAS ELÉTRICOS</td>
+                    <td>8,00</td>
+                    <td>8,00</td>
+                    <td>8,00</td>
+                    <td>4</td>
+                    <td>Aprovado por Média</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <li class="li-sanfona" id="sanfona-historico" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Histórico Escolar
+            </li>
+            <div class="content">
+              <span class="edit">Histórico Escolar completo disponível para consulta e emissão de relatório oficial.</span>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Aproveitamento Acadêmico
+            </li>
+            <div class="content">
+              <span class="edit">Carga horária total integralizada: 3.600 horas (90,9% do perfil curricular ETT012-1).</span>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Perfil Curricular X Histórico Escolar
+            </li>
+            <div class="content">
+              <span class="edit">Comparativo de componentes obrigatórios e eletivos cumpridos no perfil ETT012-1.</span>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Componentes Requisitados na Matrícula
+            </li>
+            <div class="content">
+              <span class="edit">Todos os componentes requisitados em 2026.2 foram deferidos sem choque de horário.</span>
+            </div>
+          </ul>
+
+          <!-- Grupo 3: Informações do Período Letivo (2026.2) -->
+          <div class="grupo-sanfona-titulo"><b>Informações do Período Letivo</b> (2026.2)</div>
+          <ul class="sanfona">
+            <li class="li-sanfona" id="sanfona-grade" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Grade de Horário
+            </li>
+            <div class="content">
+              <table class="tabelaPadrao">
+                <thead>
+                  <tr class="linhaTituloTabela">
+                    <th>Horário</th>
+                    <th>Segunda</th>
+                    <th>Terça</th>
+                    <th>Quarta</th>
+                    <th>Quinta</th>
+                    <th>Sexta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="linhaDataTableTipo1">
+                    <td>07:30 - 09:10</td>
+                    <td>ETT4102</td>
+                    <td>ETT4108</td>
+                    <td>ETT4102</td>
+                    <td>ETT4215</td>
+                    <td>-</td>
+                  </tr>
+                  <tr class="linhaDataTableTipo2">
+                    <td>09:20 - 11:00</td>
+                    <td>ETT4215</td>
+                    <td>ETT4108</td>
+                    <td>TCC II</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Prioridade na Requisição de Componentes
+            </li>
+            <div class="content">
+              <span class="edit">Ordem de prioridade calculada com base na blocagem e coeficiente de rendimento no curso.</span>
+            </div>
+          </ul>
+
+          <!-- Grupo 4: Informações do Curso -->
+          <div class="grupo-sanfona-titulo"><b>Informações do Curso</b></div>
+          <ul class="sanfona">
+            <li class="li-sanfona" onclick="toggleSanfona(this)">
+              <div class="before"></div>
+              Perfil Curricular
+            </li>
+            <div class="content">
+              <span class="edit">Perfil Curricular: ETT012-1 - Engenharia Elétrica Eletrotécnica - Campus Benfica - POLI/UPE.</span>
+            </div>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       4. RODAPÉ OFICIAL (#Rodape.principal)
+       ======================================================================== -->
+  <div id="Rodape" class="principal">
+    <div class="conteiner">
+      <span class="titulo">Navegadores Recomendados</span>
+      <ul>
+        <li><a href="http://br.mozdev.org/download/" target="_blank" id="mozilla" title="Mozilla Firefox 3 ou superior">Mozilla Firefox</a></li>
+        <li><a href="http://www.google.com/chrome?hl=pt-BR" target="_blank" id="chrome" title="Google Chrome 2 ou superior">Google Chrome</a></li>
+        <li><a href="http://windows.microsoft.com/pt-br/internet-explorer/download-ie" target="_blank" id="ie" title="Internet Explorer 8 ou superior">Internet Explorer</a></li>
+      </ul>
+
+      <span class="icones">
+        Ícones providos por <a href="http://glyphicons.com/" target="_blank">glyphicons.com</a>
+      </span>
+
+      <span class="maquina" title="Máquina:22">
+        <span class="fonteBranca"><strong>22</strong></span>
+      </span>
+
+      <div class="info">
+        <p>SIG@ - Versão 3.100.1.98 | Todos os Direitos Reservados à <strong>UFPE-NTI</strong></p>
+        <p>Central de Atendimento: <strong><a href="http://www.upe.br/" target="_blank">http://www.upe.br/</a></strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SCRIPTS INTERATIVOS (Cronômetro de Sessão, Sanfonas, Alto Contraste)
+       ======================================================================== -->
+  <script>
+    // Cronômetro regressivo iniciando em 19:55 (exatamente como no print original)
+    let remainingSeconds = 19 * 60 + 55;
+    const timerElement = document.getElementById('sessionTimer');
+
+    setInterval(function () {
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
+        const mins = Math.floor(remainingSeconds / 60);
+        const secs = remainingSeconds % 60;
+        timerElement.textContent =
+          String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+      }
+    }, 1000);
+
+    // Abre/fecha sanfonas exatamente como no jQuery do SIG@
+    function toggleSanfona(liElement) {
+      const contentDiv = liElement.nextElementSibling;
+      if (!contentDiv || !contentDiv.classList.contains('content')) return;
+      const isOpen = contentDiv.classList.contains('aberto');
+      if (isOpen) {
+        contentDiv.classList.remove('aberto');
+        liElement.classList.remove('ativo');
+      } else {
+        contentDiv.classList.add('aberto');
+        liElement.classList.add('ativo');
+      }
+    }
+
+    function abrirSanfona(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const contentDiv = el.nextElementSibling;
+        if (contentDiv && !contentDiv.classList.contains('aberto')) {
+          contentDiv.classList.add('aberto');
+          el.classList.add('ativo');
+        }
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // Alto contraste
+    let highContrast = false;
+    function toggleContrast() {
+      highContrast = !highContrast;
+      document.body.style.filter = highContrast ? 'invert(100%) contrast(115%)' : 'none';
+    }
+
+    // Garante escala de 980px mesmo quando aberto dentro do visualizador interno do WhatsApp (QuickLook)
+    function adjustMobileQuickLookScale() {
+      if (window.screen && window.screen.width < 768 && window.innerWidth < 900) {
+        document.documentElement.style.zoom = (window.innerWidth / 980);
+      }
+    }
+    adjustMobileQuickLookScale();
+    window.addEventListener('resize', adjustMobileQuickLookScale);
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+services:
+  siga-upe:
+    build: .
+    container_name: siga-upe-clone
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      # Se a porta 80 já estiver ocupada no seu servidor, troque para:
+      # - "8080:80"
